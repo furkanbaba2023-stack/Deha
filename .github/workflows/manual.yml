@@ -1,0 +1,25 @@
+name: Deha Live Bot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodu indir
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Paketleri kur
+        run: pip install -r requirements.txt
+
+      - name: Canlı maçları çek
+        run: python live_matches.py
